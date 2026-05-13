@@ -1,0 +1,20 @@
+{
+  "welcomeFile": "index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/api/(.*)$",
+      "destination": "backend",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/(.*)$",
+      "target": "index.html",
+      "service": "html5-apps-repo",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}
