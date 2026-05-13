@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP BTP CPI Audit Log Viewer</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CPI Audit Log Viewer</h1>
+      <p>Retrieve and export audit logs from SAP BTP Cloud Integration</p>
+    </header>
+
+    <main>
+      <form id="auditLogForm">
+        <fieldset>
+          <legend>Search Criteria</legend>
+
+          <div class="form-group">
+            <label for="userId">User ID *</label>
+            <input 
+              type="text" 
+              id="userId" 
+              name="userId" 
+              placeholder="e.g., user@example.com"
+              required
+            >
+            <small>The user for which to retrieve audit logs</small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="startDate">Start Date *</label>
+              <input 
+                type="date" 
+                id="startDate" 
+                name="startDate"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label for="startTime">Start Time</label>
+              <input 
+                type="time" 
+                id="startTime" 
+                name="startTime"
+                value="00:00"
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="endDate">End Date *</label>
+              <input 
+                type="date" 
+                id="endDate" 
+                name="endDate"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <label for="endTime">End Time</label>
+              <input 
+                type="time" 
+                id="endTime" 
+                name="endTime"
+                value="23:59"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="object">Object Type (Optional)</label>
+            <input 
+              type="text" 
+              id="object" 
+              name="object" 
+              placeholder="e.g., IntegrationContent"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="action">Action (Optional)</label>
+            <select id="action" name="action">
+              <option value="">-- All Actions --</option>
+              <option value="Create">Create</option>
+              <option value="Read">Read</option>
+              <option value="Update">Update</option>
+              <option value="Delete">Delete</option>
+              <option value="Deploy">Deploy</option>
+              <option value="Execute">Execute</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="result">Result (Optional)</label>
+            <select id="result" name="result">
+              <option value="">-- All Results --</option>
+              <option value="Success">Success</option>
+              <option value="Failure">Failure</option>
+              <option value="Error">Error</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="button" id="exportBtn" class="btn btn-secondary" disabled>Export as CSV</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div id="results" class="results-container" style="display:none;">
+        <h2>Results</h2>
+        <div class="results-info">
+          <p>Found <span id="resultCount">0</span> audit log entries</p>
+        </div>
+        <div class="table-wrapper">
+          <table id="resultsTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Object</th>
+                <th>Action</th>
+                <th>Result</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="loading" class="loading" style="display:none;">
+        <p>Loading audit logs...</p>
+      </div>
+
+      <div id="error" class="error" style="display:none;">
+        <p id="errorMessage"></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
