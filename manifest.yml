@@ -1,0 +1,24 @@
+---
+applications:
+  - name: cpi-auditlog-viewer
+    buildpack: nodejs_buildpack
+    runtime: nodejs20
+    memory: 512M
+    disk_quota: 1024M
+    instances: 1
+    
+    # Environment variables
+    env:
+      NODE_ENV: production
+      PORT: 8080
+    
+    # Build and start commands
+    command: npm start
+    
+    # Routes (adjust domain as needed)
+    routes:
+      - route: cpi-auditlog-viewer-${CF_SPACE}.cfapps.us10.hana.ondemand.com
+    
+    # Service bindings (optional, if using SAP BTP services)
+    services:
+      - audit-log-service
