@@ -23,11 +23,9 @@ class AuditLogService {
       const response = await axios.post(
         authUrl,
         qs.stringify({
-          grant_type: 'password',
-          client_id: 'sb-clone-auditlog-xsuaa-app!b123|auditlog-xsuaa!b123',
-          client_secret: process.env.BTP_PASSWORD,
-          username: process.env.BTP_USERNAME,
-          password: process.env.BTP_PASSWORD
+          grant_type: 'client_credentials',
+          client_id: 'sb-5c04c52b-7455-44f2-9207-4b02f94f6991!b620512|auditlog-management!b1187',
+          client_secret: 'f7398745-a06e-4546-b254-167de9847ae5$-Aa-9y6fX8EF-Z8z8hLroxh9IXajDKsj_l_JKonpRxU='
         }),
         {
           headers: {
